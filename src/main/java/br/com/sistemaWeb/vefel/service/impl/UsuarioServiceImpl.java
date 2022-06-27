@@ -4,7 +4,9 @@ import br.com.sistemaWeb.vefel.models.Usuario;
 import br.com.sistemaWeb.vefel.repository.UsuarioRepository;
 import br.com.sistemaWeb.vefel.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired

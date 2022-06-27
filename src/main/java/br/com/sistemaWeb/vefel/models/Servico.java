@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Timer;
 
 @Entity
@@ -29,7 +30,8 @@ public class Servico implements Serializable {
 
     @NotNull
     @Column(name = "tempo")
-    private Timer tempo;
+    @Temporal(TemporalType.TIME)
+    private Date tempo;
 
     public long getId() {
         return id;
@@ -63,11 +65,11 @@ public class Servico implements Serializable {
         this.valor = valor;
     }
 
-    public Timer getTempo() {
+    public Date getTempo() {
         return tempo;
     }
 
-    public void setTempo(Timer tempo) {
+    public void setTempo(Date tempo) {
         this.tempo = tempo;
     }
 }
