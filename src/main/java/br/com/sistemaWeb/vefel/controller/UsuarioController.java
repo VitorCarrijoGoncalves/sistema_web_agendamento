@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
@@ -17,22 +18,16 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getLogin () {
-		return "login";
+	public ModelAndView getLogin() {
+		ModelAndView mv = new ModelAndView("login");
+		return mv;
 	}
 
 	@RequestMapping(value = "/login/usuario", method = RequestMethod.GET)
-	public String getCadastro () {
-		return "usuarioForm";
+	public ModelAndView getCadastro () {
+		ModelAndView mv = new ModelAndView("register");
+		return mv;
 	}
-
-	//@RequestMapping(value = "/fiscais/{id}", method = RequestMethod.GET)
-	//public ModelAndView getFiscalDetails (@PathVariable("id") long id) {
-	//	ModelAndView mv = new ModelAndView("fiscalDetails");
-	//	Funcionario fiscal = fiscalService.findById(id);
-	//	mv.addObject("fiscal", fiscal);
-	//	return mv;
-	//}
 
 	@RequestMapping(value = "/login/usuario/novo", method = RequestMethod.POST)
 	public String saveUsuario (@Validated Usuario usuario, BindingResult result, RedirectAttributes attributes) {
