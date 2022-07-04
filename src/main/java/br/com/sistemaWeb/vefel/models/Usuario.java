@@ -38,6 +38,17 @@ public class Usuario implements Serializable {
 	@Column(name = "ativo")
 	private Boolean isAtivo;
 
+	public Usuario() {
+	}
+
+	public Usuario(String nome, String username, String senha, PerfilEnum perfilEnum, Boolean isAtivo) {
+		this.nome = nome;
+		this.username = username;
+		this.senha = senha;
+		this.perfilEnum = perfilEnum;
+		this.isAtivo = isAtivo;
+	}
+
 	public Long getId() {
 		return id;
 	}

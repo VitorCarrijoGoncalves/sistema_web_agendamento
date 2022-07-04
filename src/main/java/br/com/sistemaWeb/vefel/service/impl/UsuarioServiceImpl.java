@@ -31,4 +31,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Boolean validarStatus(Usuario usuario) {
 		return null;
 	}
+
+	@Override
+	public Usuario findbyUsername(String username) {
+		return usuarioRepository.findByUsername(username);
+	}
 }

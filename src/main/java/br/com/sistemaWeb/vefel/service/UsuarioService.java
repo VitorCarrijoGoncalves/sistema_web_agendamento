@@ -13,4 +13,6 @@ public interface UsuarioService {
 
     Boolean validarStatus(Usuario usuario);
 
+    Usuario findbyUsername(String username);
+
 }

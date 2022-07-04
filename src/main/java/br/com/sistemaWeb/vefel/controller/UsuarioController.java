@@ -1,5 +1,7 @@
 package br.com.sistemaWeb.vefel.controller;
 
+import br.com.sistemaWeb.vefel.dto.UsuarioDTO;
+import br.com.sistemaWeb.vefel.enums.PerfilEnum;
 import br.com.sistemaWeb.vefel.models.Usuario;
 import br.com.sistemaWeb.vefel.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,22 +26,24 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/login/usuario", method = RequestMethod.GET)
-	public ModelAndView getCadastro () {
+	public ModelAndView getCadastro (UsuarioDTO usuarioDTO) {
 		ModelAndView mv = new ModelAndView("register");
 		return mv;
 	}
 
-	@RequestMapping(value = "/login/usuario/novo", method = RequestMethod.POST)
-	public String saveUsuario (@Validated Usuario usuario, BindingResult result, RedirectAttributes attributes) {
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String saveUsuario (@Validated UsuarioDTO usuarioDTO, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			if (usuarioService.findById(usuario.getId()) != null) {
+			if (usuarioService.findbyUsername(usuarioDTO.getUsername()) != null) {
 				return "redirect:/login/usuario";
 			}
 		}
 
+		Usuario usuario = new Usuario(usuarioDTO.getNome(), usuarioDTO.getUsername(),
+				usuarioDTO.getPassword(), PerfilEnum.USER, true);
 
 		usuarioService.save(usuario);
-		return "redirect:/login";
+		return "/login";
 
 	}
 

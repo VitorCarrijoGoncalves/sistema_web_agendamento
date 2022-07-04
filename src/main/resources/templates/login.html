@@ -39,15 +39,15 @@
                      class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form>
+                <form action="#" th:object="${usuario}" th:action="@{/login/authenticate}" method="post">
 
                     <div class="form-outline mb-4">
-                        <input type="email" id="form3Example3" class="form-control form-control-lg"
+                        <input type="text" id="username" class="form-control form-control-lg"
                                placeholder="Usuário" />
                     </div>
 
                     <div class="form-outline mb-3">
-                        <input type="password" id="form3Example4" class="form-control form-control-lg"
+                        <input type="password" id="senha" class="form-control form-control-lg"
                                placeholder="Senha" />
                     </div>
 
