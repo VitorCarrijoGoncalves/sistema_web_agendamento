@@ -1,4 +1,4 @@
-package br.com.sistemaWeb.vefel.models;
+package br.com.sistemaWeb.vefel.models.bd_web;
 
 import br.com.sistemaWeb.vefel.enums.PerfilEnum;
 import com.sun.istack.NotNull;

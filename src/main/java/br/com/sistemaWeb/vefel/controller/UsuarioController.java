@@ -2,7 +2,7 @@ package br.com.sistemaWeb.vefel.controller;
 
 import br.com.sistemaWeb.vefel.dto.UsuarioDTO;
 import br.com.sistemaWeb.vefel.enums.PerfilEnum;
-import br.com.sistemaWeb.vefel.models.Usuario;
+import br.com.sistemaWeb.vefel.models.bd_web.Usuario;
 import br.com.sistemaWeb.vefel.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -44,6 +44,12 @@ public class UsuarioController {
 
 		usuarioService.save(usuario);
 		return "/login";
+
+	}
+
+	@RequestMapping(value = "/login/authenticate", method = RequestMethod.POST)
+	public String logar (@Validated UsuarioDTO usuarioDTO, BindingResult result, RedirectAttributes attributes) {
+		return null;
 
 	}
 

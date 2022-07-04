@@ -1,7 +1,6 @@
 package br.com.sistemaWeb.vefel.service;
 
-import br.com.sistemaWeb.vefel.models.Usuario;
-import org.springframework.stereotype.Service;
+import br.com.sistemaWeb.vefel.models.bd_web.Usuario;
 
 public interface UsuarioService {
 

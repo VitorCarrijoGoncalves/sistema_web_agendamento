@@ -1,4 +1,4 @@
-package br.com.sistemaWeb.vefel.models;
+package br.com.sistemaWeb.vefel.models.bd_web;
 
 import com.sun.istack.NotNull;
 
@@ -13,7 +13,7 @@ public class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "nome")
@@ -34,24 +34,48 @@ public class Pessoa implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoa")
     private List<Agendamento> agendamentos;
 
-    public void setId(long id) {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    public String getCpfCnpj() {
+        return cpfCnpj;
+    }
+
     public void setCpfCnpj(String cpfCnpj) {
         this.cpfCnpj = cpfCnpj;
+    }
+
+    public String getTipoPessoa() {
+        return tipoPessoa;
     }
 
     public void setTipoPessoa(String tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Agendamento> getAgendamentos() {
+        return agendamentos;
     }
 
     public void setAgendamentos(List<Agendamento> agendamentos) {

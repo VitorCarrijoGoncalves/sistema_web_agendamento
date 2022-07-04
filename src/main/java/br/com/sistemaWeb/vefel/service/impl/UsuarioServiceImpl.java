@@ -1,10 +1,14 @@
 package br.com.sistemaWeb.vefel.service.impl;
 
-import br.com.sistemaWeb.vefel.models.Usuario;
-import br.com.sistemaWeb.vefel.repository.UsuarioRepository;
+import br.com.sistemaWeb.vefel.dto.UsuarioDTO;
+import br.com.sistemaWeb.vefel.enums.PerfilEnum;
+import br.com.sistemaWeb.vefel.models.bd_web.Usuario;
+import br.com.sistemaWeb.vefel.repository.bd_web.UsuarioRepository;
 import br.com.sistemaWeb.vefel.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -35,5 +39,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario findbyUsername(String username) {
 		return usuarioRepository.findByUsername(username);
+	}
+
+	public String authenticate(UsuarioDTO usuarioDTO, BindingResult result, RedirectAttributes attributes) {
+		if (result.hasErrors()) {
+			return "redirect:/login/usuario";
+		}
+
+		//Pessoa pessoa = find
+
+		Usuario usuario = new Usuario(usuarioDTO.getNome(), usuarioDTO.getUsername(),
+				usuarioDTO.getPassword(), PerfilEnum.USER, true);
+
+		//usuarioService.save(usuario);
+		return "/login";
 	}
 }
