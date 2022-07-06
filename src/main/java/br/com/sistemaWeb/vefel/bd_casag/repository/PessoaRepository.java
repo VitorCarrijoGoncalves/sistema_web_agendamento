@@ -1,6 +1,6 @@
-package br.com.sistemaWeb.vefel.repository.bd_web;
+package br.com.sistemaWeb.vefel.bd_casag.repository;
 
-import br.com.sistemaWeb.vefel.models.bd_web.Pessoa;
+import br.com.sistemaWeb.vefel.bd_casag.models.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {

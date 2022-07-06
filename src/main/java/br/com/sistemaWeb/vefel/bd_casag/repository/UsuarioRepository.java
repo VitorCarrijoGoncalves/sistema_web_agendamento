@@ -1,6 +1,6 @@
-package br.com.sistemaWeb.vefel.repository.bd_web;
+package br.com.sistemaWeb.vefel.bd_casag.repository;
 
-import br.com.sistemaWeb.vefel.models.bd_web.Usuario;
+import br.com.sistemaWeb.vefel.bd_casag.models.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package br.com.sistemaWeb.vefel.models.bd_web;
+package br.com.sistemaWeb.vefel.bd_casag.models;
 
 import javax.persistence.*;
 import java.io.Serializable;

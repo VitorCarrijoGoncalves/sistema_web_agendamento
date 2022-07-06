@@ -1,7 +1,6 @@
-package br.com.sistemaWeb.vefel.repository.bd_oab;
+package br.com.sistemaWeb.vefel.bd_oab.repository;
 
-import br.com.sistemaWeb.vefel.models.bd_oab.LoginUsers;
-import br.com.sistemaWeb.vefel.models.bd_web.Usuario;
+import br.com.sistemaWeb.vefel.bd_oab.models.LoginUsers;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

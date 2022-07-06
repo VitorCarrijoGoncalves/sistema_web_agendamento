@@ -2,7 +2,7 @@ package br.com.sistemaWeb.vefel.controller;
 
 import br.com.sistemaWeb.vefel.dto.UsuarioDTO;
 import br.com.sistemaWeb.vefel.enums.PerfilEnum;
-import br.com.sistemaWeb.vefel.models.bd_web.Usuario;
+import br.com.sistemaWeb.vefel.bd_casag.models.Usuario;
 import br.com.sistemaWeb.vefel.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;

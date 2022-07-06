@@ -1,6 +1,6 @@
 package br.com.sistemaWeb.vefel.service;
 
-import br.com.sistemaWeb.vefel.models.bd_web.Usuario;
+import br.com.sistemaWeb.vefel.bd_casag.models.Usuario;
 
 public interface UsuarioService {
 

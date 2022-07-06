@@ -1,4 +1,4 @@
-package br.com.sistemaWeb.vefel.models.bd_oab;
+package br.com.sistemaWeb.vefel.bd_oab.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

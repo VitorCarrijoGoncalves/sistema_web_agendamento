@@ -6,6 +6,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,36 +19,38 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        entityManagerFactoryRef = "oabEntityManagerFactory",
-        transactionManagerRef = "oabTransactionManager",
-        basePackages = { "br.com.sistemaWeb.vefel.bd_oab.repository" }
+        entityManagerFactoryRef = "entityManagerFactory",
+        basePackages = { "br.com.sistemaWeb.vefel.bd_casag.repository" }
 )
-public class PersistenceOabDBConfiguration {
+public class PersistenceCasagDBConfiguration {
 
-    @Bean(name = "oabDataSource")
-    @ConfigurationProperties(prefix = "dbOab.datasource")
+    @Primary
+    @Bean(name = "dataSource")
+    @ConfigurationProperties(prefix = "dbCasag.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "oabEntityManagerFactory")
+    @Primary
+    @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean
-    oabEntityManagerFactory(
+    entityManagerFactory(
             EntityManagerFactoryBuilder builder,
             @Qualifier("dataSource") DataSource dataSource
     ) {
         return builder
                 .dataSource(dataSource)
-                .packages("br.com.sistemaWeb.vefel.bd_oab")
-                .persistenceUnit("bd_oab")
+                .packages("br.com.sistemaWeb.vefel.bd_casag")
+                .persistenceUnit("bd_casag")
                 .build();
     }
 
-    @Bean(name = "oabTransactionManager")
-    public PlatformTransactionManager oabTransactionManager(
-            @Qualifier("oabEntityManagerFactory") EntityManagerFactory
-                    oabEntityManagerFactory
+    @Primary
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager transactionManager(
+            @Qualifier("entityManagerFactory") EntityManagerFactory
+                    entityManagerFactory
     ) {
-        return new JpaTransactionManager(oabEntityManagerFactory);
+        return new JpaTransactionManager(entityManagerFactory);
     }
 }
