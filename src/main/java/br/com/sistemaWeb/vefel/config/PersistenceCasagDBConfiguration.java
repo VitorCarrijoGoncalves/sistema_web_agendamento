@@ -1,7 +1,9 @@
 package br.com.sistemaWeb.vefel.config;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
@@ -27,43 +30,36 @@ import javax.sql.DataSource;
 )
 public class PersistenceCasagDBConfiguration {
 
-    @Autowired
-    Environment env;
-
     @Primary
-    @Bean(name = "dataSource")
-    @ConfigurationProperties(prefix = "bdcasag.datasource")
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("bdcasag.datasource.driver-class-name"));
-        dataSource.setUrl(env.getProperty("bdcasag.datasource.url"));
-        dataSource.setUsername(env.getProperty("bdcasag.datasource.username"));
-        dataSource.setPassword(env.getProperty("bdcasag.datasource.password"));
+    @Bean(name = "corpore")
+    @ConfigurationProperties("database1.datasource")
+    public DataSourceProperties firstDataSourceProperties(){
+        return new DataSourceProperties();
+    }
 
-        return dataSource;
+    @Bean
+    @Primary
+    @ConfigurationProperties("database1.datasource.configuration")
+    public HikariDataSource firstDataSource() {
+        return firstDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 
     @Primary
     @Bean(name = "entityManagerFactory")
-    @ConfigurationProperties(prefix = "bdcasag.datasource.configuration")
-    public LocalContainerEntityManagerFactoryBean
-    entityManagerFactory(
-            EntityManagerFactoryBuilder builder,
-            @Qualifier("dataSource") DataSource dataSource
-    ) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder
-                .dataSource(dataSource)
+                .dataSource(firstDataSource())
                 .packages("br.com.sistemaWeb.vefel.bd_casag")
-                .persistenceUnit("bdCasagUnit")
+                .persistenceUnit("casagUnit")
                 .build();
     }
 
     @Primary
     @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManager(
-            @Qualifier("entityManagerFactory") EntityManagerFactory
-                    entityManagerFactory
-    ) {
+            final @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
+
+
 }

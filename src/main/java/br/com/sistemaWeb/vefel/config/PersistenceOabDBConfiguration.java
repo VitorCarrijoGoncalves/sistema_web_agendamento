@@ -1,7 +1,10 @@
 package br.com.sistemaWeb.vefel.config;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -20,47 +23,38 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(
+@EnableJpaRepositories(basePackages = "br.com.sistemaWeb.vefel.bd_oab.repository",
         entityManagerFactoryRef = "oabEntityManagerFactory",
-        transactionManagerRef = "oabTransactionManager",
-        basePackages = { "br.com.sistemaWeb.vefel.bd_oab.repository" }
+        transactionManagerRef= "oabTransactionManager"
 )
 public class PersistenceOabDBConfiguration {
 
-    @Autowired
-    Environment env;
+    @Bean(value = "brconselho")
+    @ConfigurationProperties("database2.datasource")
+    public DataSourceProperties secondDataSourceProperties() {
+        return new DataSourceProperties();
+    }
 
-    @Bean(name = "oabDataSource")
-    @ConfigurationProperties(prefix = "bdoab.datasource")
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("bdoab.datasource.driver-class-name"));
-        dataSource.setUrl(env.getProperty("bdoab.datasource.url"));
-        dataSource.setUsername(env.getProperty("bdoab.datasource.username"));
-        dataSource.setPassword(env.getProperty("bdoab.datasource.password"));
-
-        return dataSource;
+    @Bean
+    @ConfigurationProperties("database2.datasource.configuration")
+       public BasicDataSource secondDataSource() {
+        return secondDataSourceProperties().initializeDataSourceBuilder().type(BasicDataSource.class).build();
     }
 
     @Bean(name = "oabEntityManagerFactory")
-    @ConfigurationProperties(prefix = "bdoab.datasource.configuration")
-    public LocalContainerEntityManagerFactoryBean
-    oabEntityManagerFactory(
-            EntityManagerFactoryBuilder builder,
-            @Qualifier("dataSource") DataSource dataSource
-    ) {
+    public LocalContainerEntityManagerFactoryBean brConselhoEntityManagerFactory(
+            EntityManagerFactoryBuilder builder) {
         return builder
-                .dataSource(dataSource)
-                .packages("br.com.sistemaWeb.vefel.bd_oab")
-                .persistenceUnit("bdOabUnit")
+                .dataSource(secondDataSource())
+                .packages("br.com.oab.esa.bd2")
+                .persistenceUnit("brConselhoUnit")
                 .build();
     }
 
     @Bean(name = "oabTransactionManager")
-    public PlatformTransactionManager oabTransactionManager(
-            @Qualifier("oabEntityManagerFactory") EntityManagerFactory
-                    oabEntityManagerFactory
-    ) {
+    public PlatformTransactionManager brConselhoTransactionManager(
+            @Qualifier("oabEntityManagerFactory") EntityManagerFactory oabEntityManagerFactory) {
         return new JpaTransactionManager(oabEntityManagerFactory);
     }
+
 }
