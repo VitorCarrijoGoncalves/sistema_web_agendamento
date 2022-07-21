@@ -1,7 +1,7 @@
 package br.com.sistemaWeb.vefel.service.impl;
 
 import br.com.sistemaWeb.vefel.bd_casag.models.Pessoa;
-import br.com.sistemaWeb.vefel.bd_casag.repository.PessoaRepository;
+import br.com.sistemaWeb.vefel.repository.PessoaRepository;
 import br.com.sistemaWeb.vefel.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -20,7 +20,7 @@ import javax.persistence.EntityManagerFactory;
 //@EnableTransactionManagement
 //@EnableJpaRepositories(
   //      entityManagerFactoryRef = "entityManagerFactory",
-    //    basePackages = { "br.com.sistemaWeb.vefel.bd_casag.repository" }
+    //    basePackages = { "br.com.sistemaWeb.vefel.repository" }
 //)
 //public class PersistenceCasagDBConfiguration {
 

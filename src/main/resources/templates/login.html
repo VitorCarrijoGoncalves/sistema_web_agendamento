@@ -39,7 +39,7 @@
                      class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form th:object="${usuario}" th:action="@{/login/authenticate}" method="post">
+                <form th:object="${usuarioDTO}" th:action="@{/login/authenticate}" method="post">
 
                     <div class="form-outline mb-4">
                         <input type="text" id="username" class="form-control form-control-lg"
@@ -48,7 +48,7 @@
 
                     <div class="form-outline mb-3">
                         <input type="password" id="senha" class="form-control form-control-lg"
-                               placeholder="Senha" />
+                               th:field="${usuarioDTO.password}" placeholder="Senha" />
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center">
@@ -58,7 +58,7 @@
                                 Lembre me
                             </label>
                         </div>
-                        <a href="#!" class="text-body">Esqueceu sua senha?</a>
+                        <a href="/login/usuario" class="text-body">Esqueceu sua senha?</a>
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">

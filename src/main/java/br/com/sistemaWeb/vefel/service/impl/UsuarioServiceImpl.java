@@ -3,12 +3,17 @@ package br.com.sistemaWeb.vefel.service.impl;
 import br.com.sistemaWeb.vefel.dto.UsuarioDTO;
 import br.com.sistemaWeb.vefel.enums.PerfilEnum;
 import br.com.sistemaWeb.vefel.bd_casag.models.Usuario;
-import br.com.sistemaWeb.vefel.bd_casag.repository.UsuarioRepository;
+import br.com.sistemaWeb.vefel.repository.UsuarioRepository;
 import br.com.sistemaWeb.vefel.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -41,17 +46,40 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioRepository.findByUsername(username);
 	}
 
-	public String authenticate(UsuarioDTO usuarioDTO, BindingResult result, RedirectAttributes attributes) {
+	@Override
+	public ModelAndView createUser(UsuarioDTO usuarioDTO, BindingResult result) {
 		if (result.hasErrors()) {
-			return "redirect:/login/usuario";
+			return new ModelAndView("redirect:" + "/login/usuario");
 		}
-
-		//Pessoa pessoa = find
 
 		Usuario usuario = new Usuario(usuarioDTO.getNome(), usuarioDTO.getUsername(),
 				usuarioDTO.getPassword(), PerfilEnum.USER, true);
 
-		//usuarioService.save(usuario);
-		return "/login";
+		save(usuario);
+		return new ModelAndView("redirect:" + "/login");
 	}
+	@Override
+	public ModelAndView authenticate(UsuarioDTO usuarioDTO, BindingResult result) {
+		if (result.hasErrors()) {
+			return new ModelAndView("redirect:" + "/login");
+		}
+
+		Optional<Usuario> usuario = verificarExisteUsuario(usuarioDTO);
+
+		if (!usuario.isPresent()) {
+			FieldError fieldError = new FieldError("fieldError",
+					"fieldError","Dados inválidos informados");
+			result.addError(fieldError);
+			return new ModelAndView("redirect:" + "/login");
+		}
+
+		return new ModelAndView("redirect:" + "/home");
+
+	}
+
+	@Override
+	public Optional<Usuario> verificarExisteUsuario(UsuarioDTO usuarioDTO) {
+		return usuarioRepository.findByNomeAndSenha(usuarioDTO);
+	}
+
 }
