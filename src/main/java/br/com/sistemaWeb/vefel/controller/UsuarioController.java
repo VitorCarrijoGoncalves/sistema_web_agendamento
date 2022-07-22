@@ -35,11 +35,10 @@ public class UsuarioController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView saveUsuario (@Validated UsuarioDTO usuarioDTO, BindingResult result) {
 		return usuarioService.createUser(usuarioDTO, result);
-
 	}
 
 	@RequestMapping(value = "/login/authenticate", method = RequestMethod.POST)
-	public ModelAndView logar (@Validated UsuarioDTO usuarioDTO, BindingResult result, RedirectAttributes attributes) {
+	public ModelAndView logar (@ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO, BindingResult result) {
 		return usuarioService.authenticate(usuarioDTO, result);
 	}
 

@@ -60,8 +60,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	@Override
 	public ModelAndView authenticate(UsuarioDTO usuarioDTO, BindingResult result) {
+		ModelAndView modelAndView = new ModelAndView("");
 		if (result.hasErrors()) {
-			return new ModelAndView("redirect:" + "/login");
+			modelAndView = new ModelAndView("redirect:/login");
+			modelAndView.addObject(result.getFieldErrors());
+			return modelAndView;
 		}
 
 		Optional<Usuario> usuario = verificarExisteUsuario(usuarioDTO);
@@ -70,7 +73,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 			FieldError fieldError = new FieldError("fieldError",
 					"fieldError","Dados inválidos informados");
 			result.addError(fieldError);
-			return new ModelAndView("redirect:" + "/login");
+			modelAndView = new ModelAndView("redirect:" + "/login");
+			modelAndView.addObject(result);
+			return modelAndView;
 		}
 
 		return new ModelAndView("redirect:" + "/home");
@@ -79,7 +84,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Optional<Usuario> verificarExisteUsuario(UsuarioDTO usuarioDTO) {
-		return usuarioRepository.findByNomeAndSenha(usuarioDTO);
+		return usuarioRepository.findByNomeAndSenha(usuarioDTO.getUsername(), usuarioDTO.getPassword());
 	}
 
 }
