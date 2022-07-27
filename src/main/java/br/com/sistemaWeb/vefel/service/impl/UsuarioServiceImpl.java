@@ -58,9 +58,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		save(usuario);
 		return new ModelAndView("redirect:" + "/login");
 	}
+
 	@Override
 	public ModelAndView authenticate(UsuarioDTO usuarioDTO, BindingResult result) {
-		ModelAndView modelAndView = new ModelAndView("");
+		ModelAndView modelAndView = null;
 		if (result.hasErrors()) {
 			modelAndView = new ModelAndView("redirect:/login");
 			modelAndView.addObject(result.getFieldErrors());
@@ -84,7 +85,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Optional<Usuario> verificarExisteUsuario(UsuarioDTO usuarioDTO) {
-		return usuarioRepository.findByNomeAndSenha(usuarioDTO.getUsername(), usuarioDTO.getPassword());
+		return usuarioRepository.findByUsernameAndSenha(usuarioDTO.getUsername(), usuarioDTO.getPassword());
 	}
 
 }
