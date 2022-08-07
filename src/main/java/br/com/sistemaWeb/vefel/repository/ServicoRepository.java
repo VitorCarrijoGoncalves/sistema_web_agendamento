@@ -1,8 +1,8 @@
 package br.com.sistemaWeb.vefel.repository;
 
 import br.com.sistemaWeb.vefel.bd_casag.models.Pessoa;
-import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.sistemaWeb.vefel.bd_casag.models.Servico;
 import org.springframework.data.repository.CrudRepository;
 
-public interface PessoaRepository extends CrudRepository<Pessoa, Long> {
+public interface ServicoRepository extends CrudRepository<Servico, Long> {
 }

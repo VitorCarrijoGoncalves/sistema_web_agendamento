@@ -1,8 +1,6 @@
 package br.com.sistemaWeb.vefel.controller;
 
-import br.com.sistemaWeb.vefel.bd_casag.models.Servico;
 import br.com.sistemaWeb.vefel.dto.ServicoDto;
-import br.com.sistemaWeb.vefel.dto.UsuarioDTO;
 import br.com.sistemaWeb.vefel.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -13,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class CategoriaController {
+public class ServicoController {
 
     @Autowired
-    private CategoriaService categoriaService;
+    private ServicoService servicoService;
 
-    @RequestMapping(value = "/categoria/servico", method = RequestMethod.POST)
+    @RequestMapping(value = "/servico/new", method = RequestMethod.POST)
     public ModelAndView newService(@ModelAttribute("servico") ServicoDto servicoDto, BindingResult result) {
         return categoriaService.newService(servicoDto, result);
     }

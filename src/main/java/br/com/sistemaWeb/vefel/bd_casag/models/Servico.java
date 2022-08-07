@@ -32,6 +32,15 @@ public class Servico implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date tempo;
 
+    public Servico () {}
+
+    public Servico(String descricao, Categoria categoria, long valor, Date tempo) {
+        this.descricao = descricao;
+        this.categoria = categoria;
+        this.valor = valor;
+        this.tempo = tempo;
+    }
+
     public long getId() {
         return id;
     }
