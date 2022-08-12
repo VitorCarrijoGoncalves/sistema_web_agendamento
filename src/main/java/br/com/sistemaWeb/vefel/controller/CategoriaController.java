@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
-public class CategoriaController {
+//@RestController
+//public class CategoriaController {
 
-    @Autowired
-    private CategoriaService categoriaService;
+//    @Autowired
+//    private CategoriaService categoriaService;
+//
+//    @RequestMapping(value = "/categoria/servico", method = RequestMethod.POST)
+//    public ModelAndView newService(@ModelAttribute("servico") ServicoDto servicoDto, BindingResult result) {
+//        return categoriaService.newService(servicoDto, result);
+//    }
 
-    @RequestMapping(value = "/categoria/servico", method = RequestMethod.POST)
-    public ModelAndView newService(@ModelAttribute("servico") ServicoDto servicoDto, BindingResult result) {
-        return categoriaService.newService(servicoDto, result);
-    }
-
-}
+//}

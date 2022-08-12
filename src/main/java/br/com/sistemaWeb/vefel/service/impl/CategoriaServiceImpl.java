@@ -8,9 +8,11 @@ import br.com.sistemaWeb.vefel.enums.PerfilEnum;
 import br.com.sistemaWeb.vefel.repository.CategoriaRepository;
 import br.com.sistemaWeb.vefel.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+@Service
 public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired

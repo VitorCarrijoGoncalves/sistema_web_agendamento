@@ -8,9 +8,11 @@ import br.com.sistemaWeb.vefel.repository.ServicoRepository;
 import br.com.sistemaWeb.vefel.service.CategoriaService;
 import br.com.sistemaWeb.vefel.service.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+@Service
 public class ServicoServiceImpl implements ServicoService {
 
     @Autowired

@@ -14,4 +14,10 @@ public class RoutesController {
         return mv;
     }
 
+    @RequestMapping(value = "/novo/servico", method = RequestMethod.GET)
+    public ModelAndView getNewService() {
+        ModelAndView mv = new ModelAndView("servico");
+        return mv;
+    }
+
 }
