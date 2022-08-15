@@ -16,7 +16,7 @@ public class RoutesController {
 
     @RequestMapping(value = "/novo/servico", method = RequestMethod.GET)
     public ModelAndView getNewService() {
-        ModelAndView mv = new ModelAndView("servico");
+        ModelAndView mv = new ModelAndView("cadastro-servico");
         return mv;
     }
 

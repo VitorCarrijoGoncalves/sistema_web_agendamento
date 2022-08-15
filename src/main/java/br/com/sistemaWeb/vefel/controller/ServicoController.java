@@ -18,7 +18,7 @@ public class ServicoController {
     private ServicoService servicoService;
 
     @RequestMapping(value = "/novo/servico/", method = RequestMethod.POST)
-    public ModelAndView newService(@ModelAttribute("servicoDTO") ServicoDto servicoDto, BindingResult result) {
+    public ModelAndView newService(@ModelAttribute("servicoDto") ServicoDto servicoDto, BindingResult result) {
         return servicoService.newService(servicoDto, result);
     }
 
