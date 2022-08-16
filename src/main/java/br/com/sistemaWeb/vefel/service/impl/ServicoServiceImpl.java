@@ -1,9 +1,8 @@
 package br.com.sistemaWeb.vefel.service.impl;
 
+import br.com.sistemaWeb.vefel.bd_casag.models.Categoria;
 import br.com.sistemaWeb.vefel.bd_casag.models.Servico;
-import br.com.sistemaWeb.vefel.bd_casag.models.Usuario;
 import br.com.sistemaWeb.vefel.dto.ServicoDto;
-import br.com.sistemaWeb.vefel.enums.PerfilEnum;
 import br.com.sistemaWeb.vefel.repository.ServicoRepository;
 import br.com.sistemaWeb.vefel.service.CategoriaService;
 import br.com.sistemaWeb.vefel.service.ServicoService;
@@ -32,6 +31,11 @@ public class ServicoServiceImpl implements ServicoService {
 
         save(servico);
         return new ModelAndView("redirect:" + "/categoria/servico");
+    }
+
+    @Override
+    public Iterable<Categoria> getListOfCategorias() {
+        return categoriaService.getListOfCategorias();
     }
 
     public void save(Servico servico) {

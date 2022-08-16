@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 
@@ -21,5 +23,10 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public Categoria findById(Long idCategoria) {
         return categoriaRepository.findById(idCategoria).get();
+    }
+
+    @Override
+    public Iterable<Categoria> getListOfCategorias() {
+        return categoriaRepository.findAll();
     }
 }

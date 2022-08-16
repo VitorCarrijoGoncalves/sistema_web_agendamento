@@ -55,8 +55,8 @@
                                             id="tempo" placeholder="Tempo" th:field="${servicoDto.tempo}">
                                     </div>
                                     <div class="col-sm-6">
-                                        <select class="form-control" th:each="student: ${students}">
-                                            <option value="th:text='${servicoDto.idCategoria.id}'">@{th:text="${servicoDto.idCategoria.descricao}"}</option>
+                                        <select class="form-control" th:each="categoria: ${categorias}">
+                                            <option value="th:text='${categoria.id}'">@{th:text="${categoria.descricao}"}</option>
                                         </select>
                                     </div>
                                 </div>
