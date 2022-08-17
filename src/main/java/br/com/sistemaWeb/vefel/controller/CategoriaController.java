@@ -27,9 +27,9 @@ public class CategoriaController {
 //        return categoriaService.newService(servicoDto, result);
 //    }
 
-    @RequestMapping(value = "/novo/servico", method = RequestMethod.POST)
-    public void getListOfCategorias(Model model, BindingResult result) {
-        model.addAttribute("categorias", categoriaService.getListOfCategorias());
-    }
+//    @RequestMapping(value = "/novo/servico", method = RequestMethod.POST)
+//    public void getListOfCategorias(Model model, BindingResult result) {
+//        model.addAttribute("categorias", categoriaService.getListOfCategorias());
+//    }
 
 }

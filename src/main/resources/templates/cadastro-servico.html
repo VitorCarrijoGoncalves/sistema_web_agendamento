@@ -38,14 +38,14 @@
                                 <h1 class="h4 text-gray-900 mb-4">Novo Serviço!</h1>
                             </div>
                             <!-- <form class="user"> -->
-                            <form class="user" th:action="@{/novo/servico}" th:object="${servicoDto}" method="post">
+                            <form class="user" th:action="@{/servico/novo}" th:object="${servicoDto}" method="post">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="descricao"
                                             placeholder="Descrição" th:field="${servicoDto.descricao}">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="valor"
+                                        <input type="number" class="form-control form-control-user" id="valor"
                                             placeholder="Valor" th:field="${servicoDto.valor}">
                                     </div>
                                 </div>
@@ -55,8 +55,8 @@
                                             id="tempo" placeholder="Tempo" th:field="${servicoDto.tempo}">
                                     </div>
                                     <div class="col-sm-6">
-                                        <select class="form-control" th:each="categoria: ${categorias}">
-                                            <option value="th:text='${categoria.id}'">@{th:text="${categoria.descricao}"}</option>
+                                        <select class="form-control">
+                                            <option th:each="categoria : ${categorias}" th:value="${servicoDto.idCategoria}" th:text="${categoria.descricao}"></option>
                                         </select>
                                     </div>
                                 </div>

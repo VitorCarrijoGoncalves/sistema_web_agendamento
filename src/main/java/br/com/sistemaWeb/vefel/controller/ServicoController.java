@@ -5,6 +5,7 @@ import br.com.sistemaWeb.vefel.dto.ServicoDto;
 import br.com.sistemaWeb.vefel.service.CategoriaService;
 import br.com.sistemaWeb.vefel.service.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,12 @@ public class ServicoController {
     @Autowired
     private ServicoService servicoService;
 
+    @Autowired
+    private CategoriaService categoriaService;
+
     @RequestMapping(value = "/servico/novo", method = RequestMethod.POST)
-    public ModelAndView newService(@ModelAttribute("servicoDto") ServicoDto servicoDto, BindingResult result) {
+    public ModelAndView newService(@ModelAttribute("servicoDto") ServicoDto servicoDto, Model model, BindingResult result) {
+        model.addAttribute("categorias", categoriaService.getListOfCategorias());
         return servicoService.newService(servicoDto, result);
     }
 
